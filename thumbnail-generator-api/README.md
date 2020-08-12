@@ -1,40 +1,28 @@
-# PoC: Thumbnail Generator API
+# Thumbnail API
 
-## Goal
-Build a simple API that generates thumbnails from a source image
+### Code challenge
+The idea of this code challenge is to build an API that generates thumbnails with diferent sizes from a provided image.
 
-## Requirements
-- The API should provide at least 1 endpoint where the user will be able to POST the original image
-- The API must **ONLY** accept PNG and JPEG files
-- The API must reject input file bigger than **5mb**
-- The API should give the user 3 new images with the following dimensions
-  - 400x300
-  - 160x120
-  - 120x120
+#### Implemented solution
+I have used Docker and Docker-Compose to run the API in Node.js. I have implemented express for http server, multer for image upload and sharp to resize them, these are the main libraries.
 
-## Grading Guidelines
+- It has only one endpoint (/photos) that only accepts POST method.
+- It receives the imagen from a multipart/form-data request.
+- After that, generates the required thumbnails (different sizes for each one).
+- The response contains an array with the files' filename.
 
-### MVP (40 points)
-- Every requirement is met
-- The solution runs on our enviroment
-- Tech Stack: Node.js >=8 / Python 3
-- Any ENV specific value should be configurable and documented
-- Everything should work after following a simple README
-- The code should be clear and easy to read / debug
+#### Running project
 
-### Nice moves (5 points each)
-- It includes **RAML** or **Swagger** documentation 
-- It includes configuration files / scripts for deploying it on **AWS** or **GCP**
-- It's serverless! (either **AWS Lambda + API Gateway** or **GCP Cloud Functions**)
-- It relies on **Serverless Framework** or **SAM**
-- It's Dockerized for local development / testing
-- It leverages cloud services (ie: AWS S3, SNS, SQS, etc...)
-- It's asynchronic
-- It's fast (<~500ms after upload finishes)
-- It includes some kind of testing (unit tests, integration tests, etc) with at least 70% coverage
-- It has an auth implementation (recommended: Auth0)
+To run this project you have to have installed docker and docker-compose. Then in a terminal, located on the root directory enter the following command and wait a few seconds:
 
-### Wait, WHAT?! (10 points each)
-- It includes a configuration file / script to setup a CI/CD process on AWS or GCP
-- It includes three different kinds of tests (unit, integration and performance)
+```
+  docker-compose -f docker/docker-compose-dev.yml up
+```
 
+NOTE: the first time it will build the docker imagen and it would take a few minutes.
+
+#### Documentation
+Coming soon
+
+#### Test
+Coming soon

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  thumbnail_api:
+    container_name: thumbnail_api
+    build:
+      context: ../api
+      dockerfile: Dockerfile.dev
+    env_file:
+      - ../.env_dev
+    volumes:
+      - ../api/routes:/srv/thumbnail-api/routes
+      - ../api/middlewares:/srv/thumbnail-api/middlewares
+      - ../api/api.js:/srv/thumbnail-api/api.js
+      - ../api/uploads:/srv/thumbnail-api/uploads
+    ports:
+      - "${API_PORT}:${API_PORT}"

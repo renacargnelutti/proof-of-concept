@@ -1,0 +1,11 @@
+FROM node:latest
+
+RUN mkdir /srv/thumbnail-api
+WORKDIR /srv/thumbnail-api
+
+ADD package.json /srv/thumbnail-api/
+RUN npm install
+
+RUN npm install -g nodemon
+
+CMD nodemon api.js
