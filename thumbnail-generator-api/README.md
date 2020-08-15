@@ -11,7 +11,13 @@ I have used Docker and Docker-Compose to run the API in Node.js. I have implemen
 - After that, generates the required thumbnails (different sizes for each one).
 - The response contains an array with the files' filename.
 
-#### Running project
+#### Setting up and running the project
+
+First of all, you have to define the .env and .env_file (Docker purposes) on root directory. They have to have the next variables:
+
+```
+  API_PORT=DESIRED_PORT
+```
 
 To run this project you have to have installed docker and docker-compose. Then in a terminal, located on the root directory enter the following command and wait a few seconds:
 
@@ -29,4 +35,9 @@ To run unit tests you have to go to /api, and then run:
 ```
 npm install
 npm run test
+```
+If you want to run performance test (over /api/v1/photos endpoint), just run:
+```
+npm install
+npm run performance-test
 ```

@@ -1,0 +1,12 @@
+config:
+    target: http://localhost:{{ $processEnvironment.API_PORT }}
+    phases:
+      - duration: 10
+        arrivalRate: 10
+    processor: './processor-utils.js'
+scenarios:
+    - flow:
+        - post:
+            url: "/api/v1/photos"
+            beforeRequest: 'setJSONBody'
+            afterResponse: 'logResponse'
