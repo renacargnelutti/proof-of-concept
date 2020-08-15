@@ -12,6 +12,7 @@ services:
     volumes:
       - ../api/routes:/srv/thumbnail-api/routes
       - ../api/middlewares:/srv/thumbnail-api/middlewares
+      - ../api/docs:/srv/thumbnail-api/docs
       - ../api/api.js:/srv/thumbnail-api/api.js
       - ../api/uploads:/srv/thumbnail-api/uploads
     ports:

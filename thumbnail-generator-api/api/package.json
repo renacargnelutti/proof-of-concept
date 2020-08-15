@@ -1,11 +1,23 @@
 {
   "name": "thumbnail-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "helmet": "^3.21.3",
     "multer": "^1.4.2",
-    "sharp": "^0.25.4"
+    "sharp": "^0.25.4",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "test": "mocha tests/*spec.js"
   }
 }

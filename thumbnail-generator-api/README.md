@@ -22,7 +22,11 @@ To run this project you have to have installed docker and docker-compose. Then i
 NOTE: the first time it will build the docker imagen and it would take a few minutes.
 
 #### Documentation
-Coming soon
+Once you have the API running you will be able to see the documentation on the resource /api/v1/docs. For instance if you are running it on port 45000, you will find the documentation on http://localhost:45000/api/v1/docs
 
 #### Test
-Coming soon
+To run unit tests you have to go to /api, and then run:
+```
+npm install
+npm run test
+```

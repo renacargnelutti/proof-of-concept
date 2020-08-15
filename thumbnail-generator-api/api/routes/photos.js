@@ -17,14 +17,17 @@ router.route('/')
             let filenames = [];
 
             if (!file) return res.status(400).json({ success: false, error: 'Bad request' });
-            for (const size of sizes) {
-                let newFilename = `${size.width}X${size.height}_${file.filename}`;
-                let newFile = await sharp(file.path)
-                    .resize(size.width, size.height)
-                    .toFile(`${file.destination}/${newFilename}`);
 
-                filenames.push(newFilename);
-            }
+            await Promise.all(
+                sizes.map(async (size) => {
+                    let newFilename = `${size.width}X${size.height}_${file.filename}`;
+                    await sharp(file.path)
+                        .resize(size.width, size.height)
+                        .toFile(`${file.destination}/${newFilename}`);
+
+                    filenames.push(newFilename);
+                })
+            );
 
             res.json({ success: true, filenames });
         }
