@@ -8,6 +8,10 @@ const errorMiddleware = (err, req, res, next) => {
         res.status(415).json({ success: false, error: 'Unsopported media type' });
         return;
     }
+    else if (err.name && err.name === 'UnauthorizedError') {
+        res.status(401).json({ success: false, error: 'Unauthorized' });
+        return;
+    }
 
     next();
   }

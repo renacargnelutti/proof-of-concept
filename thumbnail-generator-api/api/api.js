@@ -6,6 +6,9 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const multer = require('multer');
 const swaggerUI = require('swagger-ui-express');
+const jwt = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwksRsa = require('jwks-rsa');
 
 const { swaggerDocument } = require('./docs/swagger');
 const { errorMiddleware } = require('./middlewares/errors');
@@ -36,12 +39,28 @@ const fileFilter = (req, file, cb) => {
     cb(null, true);
 }
 
+const checkJwt = jwt({
+    secret: jwksRsa.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: process.env.AUTH_JWKS_URI,
+    }),
+    audience: process.env.AUTH_AUDIENCE,
+    issuer: process.env.AUTH_ISSUER,
+    algorithms: ['RS256'],
+});
+
 app.use(multer({ storage, limits, fileFilter }).single('file'));
 app.use(errorMiddleware);
 
 app.use('/api/v1', require('./routes/public'));
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/api/v1/photos', require('./routes/photos'));
+
+app.use(checkJwt);
+
+app.use('/api/v1/private', require('./routes/private'));
 
 app.listen(process.env.API_PORT || 45000);
 console.log(`Thumbnail API listening on ${process.env.API_PORT}`);
